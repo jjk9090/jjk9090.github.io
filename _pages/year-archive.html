@@ -7,4 +7,13 @@ redirect_from:
   - /wordpress/blog-posts/
 ---
 
-I'm a four year undergraduate student from [School of SISE](https:/sise.uestc.edu.cn/),[UESTC](https://uestc.edu.cn/). My research interests include large models, recommendation systems, and agents.
+{% include base_path %}
+{% capture written_year %}'None'{% endcapture %}
+{% for post in site.posts %}
+  {% capture year %}{{ post.date | date: '%Y' }}{% endcapture %}
+  {% if year != written_year %}
+    <h2 id="{{ year | slugify }}" class="archive__subtitle">{{ year }}</h2>
+    {% capture written_year %}{{ year }}{% endcapture %}
+  {% endif %}
+  {% include archive-single.html %}
+{% endfor %}
